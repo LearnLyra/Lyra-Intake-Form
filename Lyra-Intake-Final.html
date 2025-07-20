@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lyra Intake Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet"/>
+<style>
+body:not(.form-loaded) .form-page {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  z-index: -10 !important;
+}
+
+/* Unified Communication Checkbox Styling */
+#page-contact-style .communication-options {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.25rem !important;
+  margin-top: 1rem;
+}
+
+#page-contact-style .communication-options label.custom-checkbox-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex: 1 1 100% !important;
+  margin: 0 !important;
+  padding: 0.25rem 0 !important;
+  font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+#page-contact-style .custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #a8977c;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+#page-contact-style .custom-checkbox.checked {
+  background-color: #a8977c;
+  border-color: #a8977c;
+}
+
+#page-contact-style .communication-options input[type="checkbox"] {
+  display: none;
+}
+
+
+
+.communication-options {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.communication-options label {
+  display: inline-block !important;
+  margin-right: 2rem !important;
+  cursor: pointer !important;
+}
+
+.communication-options input[type="checkbox"] {
+  margin-right: 0.5rem !important;
+}
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Source Serif Pro', sans-serif;
+      background: #fdfaf7 url('lyra-form-background-final8.jpg') center/cover no-repeat fixed;
+      color: #3d3d3d;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    .form-container {
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 680px;
+      width: 100%;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+.form-page {
+  display: none !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  z-index: -1;
+}
+.form-page.active {
+  display: block !important;
+  position: relative !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  z-index: 1;
+}
+    
+.back-button-global {
+  position: absolute;
+  top: 0.5rem;
+  left: 1.25rem;
+  font-size: 0.9rem;
+  color: #a8977c;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+  display: none;
+  z-index: 10;
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+    
+    
+.back-button-global:hover {
+  transform: translateY(-3px) scale(0.97);
+  background: transparent !important;
+  box-shadow: 0 0 14px rgba(168, 151, 124, 0.8);
+  opacity: 0.9;
+  outline: none;
+}
+
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: #2f2f2f;
+    }
+    #page-welcome h1,
+    #page-thankyou h2 {
+      text-align: center;
+    }
+    #page-thankyou p {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    textarea, input, select, button {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border-radius: 4px;
+    }
+    textarea { resize: none; }
+    .auto-grow {
+      overflow: hidden;
+      min-height: 30px;
+    }
+   button {
+  background: linear-gradient(90deg, #b7a890, #a8977c); /* fully opaque */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+button:not(.cue-text):hover {
+  background: linear-gradient(90deg, #b7a890cc, #a8977ccc) !important; /* semi-transparent for glow */
+  box-shadow: 0 0 12px rgba(168, 151, 124, 0.6) !important;
+  transform: scale(0.97) !important;
+}
+
+
+    .navigation-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .scroll-container {
+  position: relative;
+      max-height: 500px;
+      padding-bottom: 2rem;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+    }
+    .child-section {
+      scroll-snap-align: start;
+      min-height: 600px;
+      padding: 2rem 0;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .image-grid div { text-align: center; }
+    .image-grid img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+}
+
+.reveal-trigger.selected {
+  box-shadow: 0 0 12px #a8977c, 0 0 24px #a8977c33;
+  border-radius: 6px;
+  transition: box-shadow 0.3s ease;
+}
+
+    }
+    .image-grid img:hover { transform: scale(1.05); }
+    .child-textarea { display: none; margin-top: 1rem; }
+    .continue-button, .scroll-next-button {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-weight: bold;
+      color: #a8977c;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .continue-button:hover, .scroll-next-button:hover {
+      transform: translateY(3px) scale(1.02);
+      opacity: 0.8;
+    }
+    .communication-options {
+      margin-top: 1rem;
+    }
+    .communication-options label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+    .communication-options input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+    .communication-other {
+      margin-top: 1rem;
+    }
+  
+.scroll-cue {
+  text-align: center;
+  margin-top: 1rem;
+  font-family: 'Playfair Display', serif;
+  color: #a8977c;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.scroll-cue .cue-text {
+  background: none;
+  border: none;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #a8977c;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+  padding: 0;
+  display: inline-block;
+}
+
+
+.scroll-cue .cue-text:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+
+
+.remove-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+
+    input::placeholder, textarea::placeholder {
+      font-family: 'Playfair Display', serif;
+      color: #7c7c7c;
+      opacity: 1;
+    }
+    input, textarea {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+
+    @media (min-width: 769px) {
+.custom-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+}
+
+    .custom-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #a8977c;
+      border-radius: 4px;
+      margin-right: 0.75rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    
+    .custom-checkbox.checked {
+      background-color: #a8977c;
+      border-color: #a8977c;
+    }
+    
+
+    .communication-options {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 0.75rem;
+    }
+
+
+    .communication-options input[type="checkbox"] {
+      display: none;
+    }
+
+
+    .custom-select-wrapper {
+      position: relative;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-top: .5rem;
+    }
+
+    .custom-select-selected {
+      padding: 0.75rem 1rem;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #3d3d3d;
+    }
+
+    .custom-select-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+      z-index: 999;
+    }
+
+    .custom-select-options li {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .custom-select-options li:hover {
+      background: #f5f0eb;
+    }
+
+    .custom-select-wrapper.open .custom-select-options {
+      display: block;
+    }
+
+
+    .dropdown-arrow {
+      float: right;
+      font-size: 1rem;
+      color: #a8977c;
+      transition: transform 0.3s ease;
+    }
+
+    .custom-select-wrapper.open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    #page-welcome h1,
+    #page-welcome p {
+      text-align: center;
+    }
+
+    .form-page {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .form-page.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    .dropdown-arrow {
+      float: right;
+      font-size: 1rem;
+      color: #a8977c;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    
+    
+.custom-select-wrapper:hover .dropdown-arrow {
+  transform: scale(1.15);
+  text-shadow: 0 0 16px rgba(168, 151, 124, 1);
+  opacity: 0.95;
+  filter: brightness(1.2);
+}
+
+    
+
+    .custom-select-wrapper.open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .form-page {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+      will-change: opacity, transform;
+    }
+
+    .form-page.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    
+.back-button-global {
+  position: absolute;
+  top: 0.5rem;
+  left: 1.25rem;
+  font-size: 0.9rem;
+  color: #a8977c;
+  font-family: 'Playfair Display', serif;
+  cursor: pointer;
+  display: none;
+  z-index: 10;
+  background: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+
+    
+    
+.back-button-global:hover {
+  transform: translateY(-3px) scale(0.97);
+  background: transparent !important;
+  box-shadow: 0 0 14px rgba(168, 151, 124, 0.8);
+  opacity: 0.9;
+  outline: none;
+}
+
+    
+
+
+    .custom-select-options {
+      max-height: 200px;
+      overflow-y: scroll !important;
+      scrollbar-width: thin;
+      scrollbar-color: #a8977c #fdfaf7;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-select-options::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .custom-select-options::-webkit-scrollbar-track {
+      background: #fdfaf7;
+      border-radius: 4px;
+    }
+
+    .custom-select-options::-webkit-scrollbar-thumb {
+      background-color: #a8977c;
+      border-radius: 4px;
+      border: 2px solid #fdfaf7;
+    }
+
+
+
+.scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  max-height: 480px;
+}
+
+.scroll-container {
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-track {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 3px;
+  height: 100%;
+  background-color: transparent !important;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scroll-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background-color: #a8977c;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(168, 151, 124, 0.6);
+  pointer-events: none;
+  z-index: 11;
+}
+
+.scroll-next-button {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 3;
+}
+
+
+/* Typography & Input Enhancements */
+textarea, input, select, button {
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  padding-inline: 1rem !important;
+}
+
+input::placeholder, textarea::placeholder {
+  letter-spacing: 0.25px !important;
+}
+
+
+/* Navigation and Form Spacing */
+.navigation-buttons {
+  margin-top: 3rem !important;
+}
+
+/* Button Hover Enhancements */
+
+.remove-name-button {
+  all: unset;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: #a8977c;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  display: inline-block;
+  white-space: nowrap;
+  user-select: none;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.remove-name-button:hover,
+.remove-name-button:focus,
+.remove-name-button:focus-visible,
+.remove-name-button:active {
+  transform: translateY(-3px) scale(0.97) !important;
+  opacity: 0.9 !important;
+  box-shadow: 0 0 14px rgba(168, 151, 124, 0.8) !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0) !important;
+  outline: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+
+
+.navigation-buttons button:hover,
+.form-page 
+button:not(.cue-text):hover {
+  background: linear-gradient(90deg, #b7a890cc, #a8977ccc) !important;
+  box-shadow: 0 0 12px rgba(168, 151, 124, 0.6) !important;
+  transform: scale(0.97) !important;
+}
+
+
+
+/* Image Zoom and Brightness */
+.image-grid img:hover {
+  transform: scale(1.05) !important;
+  filter: brightness(1.1) !important;
+}
+
+
+/* Welcome Message Word-by-Word Fade In */
+@keyframes fadeInWord {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* Page fade + shimmer effect */
+@keyframes pageShimmerFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 0 0 rgba(168, 151, 124, 0);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 32px rgba(168, 151, 124, 0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 0 rgba(168, 151, 124, 0);
+  }
+}
+
+.form-page {
+  animation: pageShimmerFade 0.8s ease-in-out;
+}
+
+
+#welcome-animated-header span {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeInWord 0.8s forwards;
+  margin-right: 0.35em;  /* 👈 add this line */
+}
+
+#welcome-animated-header span:nth-child(1) { animation-delay: 0.1s; }
+#welcome-animated-header span:nth-child(2) { animation-delay: 0.3s; }
+#welcome-animated-header span:nth-child(3) { animation-delay: 0.5s; }
+
+
+.lyra-signature-container {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #a8977c;
+  opacity: 0.9;
+  font-style: italic;
+  background: url('lyra-logo-watermark-light.svg') center 0.5rem no-repeat;
+  background-size: 80px;
+  padding-top: 3rem;
+}
+
+
+
+@keyframes pulseText {
+  0%, 100% {
+    opacity: 0.9;
+    transform: translateY(0) scale(1);
+    text-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+    text-shadow: 0 0 10px rgba(168, 151, 124, 0.5);
+  }
+}
+
+.pulse-text {
+  animation: pulseText 2s infinite;
+}
+
+
+/* Luxury Enhancement: Reduce outer padding slightly on large screens */
+@media (min-width: 1024px) {
+  .form-container {
+    padding: 2rem 2.5rem;
+  }
+}
+
+/* Luxury Enhancement: Smooth form fade-in per page */
+.form-page {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.form-page.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Luxury Enhancement: Muted disabled button state */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+.scroll-cue,
+.scroll-cue:focus,
+.scroll-cue:focus-visible,
+.scroll-cue:active,
+.scroll-cue:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.scroll-cue .cue-text:focus,
+.scroll-cue .cue-text:focus-visible,
+.scroll-cue .cue-text:active,
+.scroll-cue .cue-text:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+
+#page-environment .child-textarea {
+  max-width: 90%;
+  margin-inline: auto;
+}
+
+  // 💥 Safari macOS glow prevention
+  document.addEventListener('mousedown', function(e) {
+    if (e.target.classList.contains('scroll-cue')) {
+      e.preventDefault(); // 💀 This stops focus from being assigned
+    }
+  });
+
+textarea, input, select, button {
+  font-family: 'Source Serif Pro', serif !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Playfair Display', serif; /* keep your placeholder elegant */
+}
+
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+button {
+  font-family: 'Source Serif Pro', serif !important;
+}
+
+.scroll-cue:hover {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  outline: none !important;
+}
+
+
+.scroll-cue,
+.scroll-cue * {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.scroll-cue {
+  background-color: rgba(255, 255, 255, 0.001); /* 👈 Transparent but establishes a paint layer */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.scroll-cue .cue-text {
+  cursor: pointer;
+}
+
+.cue-text:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.scroll-cue .cue-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #a8977c;
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  transition: transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+
+.scroll-cue .cue-text:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+.scroll-cue .cue-text:hover {
+  animation: none !important; /* freezes pulse */
+  transform: translateY(-2px) scale(1.02) !important;
+  opacity: 1 !important;
+  text-shadow: 0 0 10px rgba(168, 151, 124, 0.5) !important;
+}
+
+@media (max-width: 768px) {
+
+
+ #page-environment.form-page,
+  #page-contact-style.form-page {
+    padding-top: 0rem !important;
+  }
+
+#page-contact-style h2 {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+
+#page-contact-style .custom-checkbox-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  padding-top: 0 !important;
+  flex-wrap: nowrap !important;
+}
+
+#page-contact-style .custom-checkbox {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+  margin: 0 !important;
+}
+
+
+
+  #page-contact-style .custom-checkbox-wrapper > div,
+  #page-contact-style .custom-checkbox-wrapper > span,
+  #page-contact-style .custom-checkbox-wrapper > p {
+    margin-right: 0.5rem !important;
+  }
+
+  #page-contact-style .custom-checkbox {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 0.5rem !important;
+  }
+
+  #page-contact-style .communication-options {
+    gap: 0.25rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  #page-contact-style .communication-other {
+    font-size: 0.9rem !important;
+    padding: 0.5rem 0.75rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+}
+  html, body {
+    overflow: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-attachment: scroll !important;
+    overscroll-behavior: none !important;
+  }
+
+@media (max-width: 768px) {
+  body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    padding: 1rem !important;
+  }
+}
+
+
+.form-container {
+  width: 100%;
+  max-width: 680px;
+  margin: 2rem auto;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 4px;
+  padding: 2rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+  .form-page {
+    padding-top: 1rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.45rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+    line-height: 1.45 !important;
+  }
+
+  textarea,
+  input {
+    font-size: 1rem !important;
+    padding: 0.6rem 0.9rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .navigation-buttons {
+    margin-top: 1.5rem !important;
+  }
+
+  .form-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .form-container {
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+
+document.addEventListener('blur', (e) => {
+  if (e.target.tagName === 'TEXTAREA') {
+    const container = document.querySelector('.form-container');
+    setTimeout(() => {
+      if (container.scrollHeight <= container.clientHeight + 1) {
+        container.scrollTop = 0;
+      }
+    }, 150);
+  }
+}, true);
+
+@media (max-width: 768px) {
+  .form-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .form-container {
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+
+@media (max-width: 768px) {
+  #page-contact-style.form-page.active {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  #page-contact-style.form-page.active h2 {
+    margin-top: 0.1rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  #page-contact-style.form-page.active p {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-contact-style.form-page.active .communication-other {
+    margin-bottom: 0.25rem !important;
+  }
+
+  #page-contact-style.form-page.active .navigation-buttons {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body:not(.form-loaded) #page-contact-style.form-page {
+    display: none !important;
+    padding: 0 !important;
+  }
+
+
+@media (max-width: 768px) {
+  #page-environment .scroll-track {
+    right: -2px !important;
+  }
+
+  #page-environment .scroll-wrapper {
+    padding-right: 4px !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  #page-contact-style.form-page.active,
+  #page-environment.form-page.active {
+    padding-top: 2rem !important;
+  }
+
+  .form-container {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    padding-bottom: 1.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-contact-style.form-page,
+  #page-environment.form-page {
+    margin-top: 1.25rem !important;
+    padding-top: 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Reduce vertical padding for each child section */
+  #page-environment .child-section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    min-height: 500px !important;
+  }
+
+  #page-environment h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  #page-environment .image-grid {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Reduce spacing in Stay Connected page */
+  #page-contact-style h2 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-contact-style p {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-contact-style input,
+  #page-contact-style .communication-other {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #page-contact-style .navigation-buttons {
+    margin-top: 1rem !important;
+  }
+
+  /* Optional: tighten form container overall for mobile */
+  .form-container {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Force override of page padding that was previously 0 */
+  #page-contact-style.form-page.active,
+  #page-environment.form-page.active {
+    padding-top: 1.25rem !important;
+    margin-top: 0 !important;
+  }
+
+  /* Shorten content height in environment sections */
+  #page-environment .child-section {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    min-height: 420px !important;
+  }
+
+  #page-environment h3 {
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-environment .image-grid {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* Compress contact page stack */
+  #page-contact-style h2 {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-contact-style p {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #page-contact-style input,
+  #page-contact-style .communication-other {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #page-contact-style .navigation-buttons {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Tighten form container */
+  .form-container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-environment .scroll-wrapper {
+    max-height: 480px !important;
+  }
+
+  #page-environment .child-section {
+    min-height: 480px !important;
+    max-height: 480px !important;
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-environment .child-section:not(.final-child-section) {
+    min-height: 480px !important;
+    max-height: 480px !important;
+  }
+
+  #page-environment .final-child-section {
+    min-height: 540px !important;
+    max-height: 540px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-contact-style input,
+  #page-contact-style .communication-other {
+    padding: 0.5rem 0.75rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-contact-style .navigation-buttons {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-contact-style.form-page.active {
+    padding-bottom: 0.25rem !important;
+  }
+
+  #page-contact-style .navigation-buttons {
+    margin-bottom: 0rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    background-attachment: fixed !important;
+  }
+
+  body.centered-layout {
+    align-items: center !important;
+  }
+
+  body:not(.centered-layout) {
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    width: calc(100% - 2rem) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    height: 100vh !important;
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    position: fixed !important;
+    width: 100% !important;
+    touch-action: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image: url('lyra-form-background-final8.jpg') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important; /* Fixes Safari/iOS bug */
+    background-color: #fdfaf7 !important; /* Fallback tone */
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(168, 151, 124, 0.08); /* Subtle luxury gold wash */
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    height: 100vh !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important; /* ⬅️ key change */
+    background-color: #fdfaf7 !important;
+    touch-action: none !important;
+  }
+
+  body {
+    background-image: url('lyra-form-background-final8.jpg') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(168, 151, 124, 0.08); /* Gold overlay */
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  body:not(.centered-layout) .form-container {
+    margin-top: 1.5rem !important;
+  }
+
+  /* Optional: add bottom margin to keep symmetry */
+  body:not(.centered-layout) .form-container {
+    margin-bottom: 1.25rem !important;
+  }
+
+  /* Just to be safe: prevent margin on thank you page */
+  #page-thankyou.form-page.active ~ .form-container {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-environment.form-page.active {
+    margin-top: 0.5rem !important;
+  }
+
+  #page-learning-approach.form-page.active,
+  #page-contact-style.form-page.active {
+    margin-top: 0.5rem !important;
+  }
+
+  #page-thankyou.form-page.active {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body.top-offset-page .form-container {
+    margin-top: 7.5rem !important; /* ⬅️ experiment with this value */
+  }
+}
+
+@media (min-width: 769px) {
+  body.centered-layout .form-container {
+    transform: translateY(5vh); /* Adjust this value as needed */
+  }
+
+  body.top-offset-page .form-container {
+    transform: none !important; /* Optional: avoid conflict */
+  }
+
+  body:not(.centered-layout):not(.top-offset-page) .form-container {
+    transform: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  body.centered-layout {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 100vh !important;
+  }
+
+  .form-container {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    transform: none !important; /* cancel any previous offset tweaks */
+  }
+}
+
+@media (min-width: 769px) {
+  body.centered-layout {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 100vh !important;
+    padding-top: 0 !important;
+  }
+
+  .form-container {
+    margin: 0 !important;
+    transform: none !important;
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+#welcome-animated-header span {
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #welcome-animated-header span {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #page-environment .scroll-track {
+    right: -10px !important;   /* move the track farther right */
+    width: 2px !important;    /* slightly thicker for mobile thumb feel */
+    z-index: 999 !important;  /* ensure it floats above text/buttons */
+  }
+
+  #page-environment .scroll-wrapper {
+    padding-right: 0 !important; /* remove previous "make room" hack */
+    overflow: visible !important; /* allow thumb to spill out */
+  }
+
+  #page-environment .scroll-container {
+    margin-right: 0px !important; /* pull content back in line */
+  }
+}
+
+  textarea:focus,
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="number"]:focus,
+  select:focus {
+    outline: none !important;
+    border: 1px solid #a8977c !important;
+    box-shadow: 0 0 8px rgba(168, 151, 124, 0.5) !important;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+</style>
+<style>
+.fade-in {
+  animation: fadeIn 0.8s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+</style></head>
+<body>
+<div class="fade-in" id="access-denied" style="display: none; width: 90%; max-width: 580px; margin: 10vh auto; box-sizing: border-box; background-color: rgba(255, 255, 255, 0.85); padding: 2.5rem 2rem; font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #3d3d3d; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); text-align: center; line-height: 1.6;">
+<p>
+  This form is part of a personalized experience we prepare individually for each family.<br/><br/>
+  To begin, please visit <a href="https://learnlyra.com" style="color: #a8977c; text-decoration: underline;">learnlyra.com</a> and request your invitation.
+</p>
+</div><div class="form-container">
+<a class="back-button-global" onclick="prevPage()">← Back</a>
+<form id="lyra-intake-form">
+<div class="form-page active" id="page-welcome">
+<h1 id="welcome-animated-header"><span>Welcome </span><span>to </span><span>Lyra </span></h1>
+<p>We're honored to be part of your family's journey. Let's begin.</p>
+<div class="navigation-buttons">
+<button onclick="nextPage()" type="button">Start</button>
+</div>
+</div>
+<div class="form-page" id="page-dreams">
+<h2>What future do you envision for your children’s learning and growth?</h2>
+<textarea name="parenting_dreams" placeholder="How can Lyra support your goals?" style="height: 200px;"></textarea>
+<div class="navigation-buttons">
+<button onclick="nextPage()" type="button">Next</button>
+</div>
+</div>
+<div class="form-page" id="page-learners">
+<h2>Introducing: Your Children</h2>
+<textarea name="children" placeholder="Names, ages, passions, challenges, even favorite characters — anything meaningful to them (and to you)..." style="height: 200px;"></textarea>
+<div class="navigation-buttons">
+<button onclick="nextPage()" type="button">Next</button>
+</div>
+</div>
+<div class="form-page" id="page-learning-approach">
+<h2>Philosophy &amp; Learning Needs</h2>
+<p>If there’s a style or philosophy you admire, or supports your child needs, let us know.</p>
+<textarea name="teaching_style" placeholder="Montessori, Classical, Unschooling, or your own..."></textarea>
+<textarea name="accommodations" placeholder="Accommodations, sensory needs, or learning differences..."></textarea>
+<div class="navigation-buttons">
+<button onclick="previousPageId='page-learning-approach'; nextPage()" type="button">Next</button>
+</div>
+</div>
+<div class="form-page" id="page-contact-style">
+<h2>Stay Connected</h2>
+<p style="margin-top: 1rem;">We’ll use your name and ZIP to tailor updates and guidance.</p>
+<input name="parent_name" placeholder="Your full name, please" type="text"/>
+
+<div class="custom-select-wrapper" tabindex="0">
+<input id="state-value" name="state" type="hidden"/>
+<div class="custom-select-selected">Select your state <span class="dropdown-arrow">▼</span></div>
+<ul class="custom-select-options">
+<li data-value="AL">Alabama</li>
+<li data-value="AK">Alaska</li>
+<li data-value="AS">American Samoa</li>
+<li data-value="AZ">Arizona</li>
+<li data-value="AR">Arkansas</li>
+<li data-value="CA">California</li>
+<li data-value="CO">Colorado</li>
+<li data-value="CT">Connecticut</li>
+<li data-value="DE">Delaware</li>
+<li data-value="DC">District of Columbia</li>
+<li data-value="FL">Florida</li>
+<li data-value="GA">Georgia</li>
+<li data-value="GU">Guam</li>
+<li data-value="HI">Hawaii</li>
+<li data-value="ID">Idaho</li>
+<li data-value="IL">Illinois</li>
+<li data-value="IN">Indiana</li>
+<li data-value="IA">Iowa</li>
+<li data-value="KS">Kansas</li>
+<li data-value="KY">Kentucky</li>
+<li data-value="LA">Louisiana</li>
+<li data-value="ME">Maine</li>
+<li data-value="MD">Maryland</li>
+<li data-value="MA">Massachusetts</li>
+<li data-value="MI">Michigan</li>
+<li data-value="MN">Minnesota</li>
+<li data-value="MS">Mississippi</li>
+<li data-value="MO">Missouri</li>
+<li data-value="MT">Montana</li>
+<li data-value="NE">Nebraska</li>
+<li data-value="NV">Nevada</li>
+<li data-value="NH">New Hampshire</li>
+<li data-value="NJ">New Jersey</li>
+<li data-value="NM">New Mexico</li>
+<li data-value="NY">New York</li>
+<li data-value="NC">North Carolina</li>
+<li data-value="ND">North Dakota</li>
+<li data-value="MP">Northern Mariana Islands</li>
+<li data-value="OH">Ohio</li>
+<li data-value="OK">Oklahoma</li>
+<li data-value="OR">Oregon</li>
+<li data-value="PA">Pennsylvania</li>
+<li data-value="PR">Puerto Rico</li>
+<li data-value="RI">Rhode Island</li>
+<li data-value="SC">South Carolina</li>
+<li data-value="SD">South Dakota</li>
+<li data-value="TN">Tennessee</li>
+<li data-value="TX">Texas</li>
+<li data-value="VI">U.S. Virgin Islands</li>
+<li data-value="UT">Utah</li>
+<li data-value="VT">Vermont</li>
+<li data-value="VA">Virginia</li>
+<li data-value="WA">Washington</li>
+<li data-value="WV">West Virginia</li>
+<li data-value="WI">Wisconsin</li>
+<li data-value="WY">Wyoming</li>
+</ul>
+</div>
+<p style="margin-top: 1rem;">Your preferred communication style:</p>
+<div class="communication-options">
+<label class="custom-checkbox-wrapper">
+<input name="comm_style" onchange="toggleCustomCheckbox(this)" type="checkbox" value="letters"/>
+<div class="custom-checkbox"></div>
+        Thoughtful letters, rich with insights
+      </label>
+<label class="custom-checkbox-wrapper">
+<input name="comm_style" onchange="toggleCustomCheckbox(this)" type="checkbox" value="updates"/>
+<div class="custom-checkbox"></div>
+        Quick, friendly updates
+      </label>
+<label class="custom-checkbox-wrapper">
+<input name="comm_style" onchange="toggleCustomCheckbox(this)" type="checkbox" value="summaries"/>
+<div class="custom-checkbox"></div>
+        Organized summaries and next steps
+      </label>
+</div>
+<input class="communication-other" placeholder="Or describe your favorite pace &amp; format" type="text"/>
+<div class="navigation-buttons"><button onclick="submitLyraForm()" type="button">Finish</button>
+</div>
+</div>
+<div class="form-page" id="page-thankyou">
+<h2>Thank You</h2>
+<p>Your family’s story matters — and we're honored to help shape the next chapter. Your first personalized steps with Lyra will be arriving soon.</p>
+<div class="lyra-signature-container">— The Lyra Team</div></div>
+<div class="form-page" id="page-name-confirm">
+<h2>Just checking — are these the names of your learners?</h2>
+<p>Based on what you shared, we noticed these names.<br/>
+     You can make any changes below, or remove a name if it's not one of your learners.</p>
+<div id="name-confirmation-list"></div>
+<div class="navigation-buttons">
+<button onclick="confirmNames()" type="button">Continue</button>
+</div>
+</div>
+</form>
+</div>
+<script>
+let currentPage = 0;
+let pages = [];
+let children = [];
+let previousPageId = null; 
+const backRoutes = {
+  "page-dreams": "page-welcome",
+  "page-learners": "page-dreams",
+  "page-name-confirm": "page-learners",
+  "page-environment": "page-name-confirm",
+  "page-learning-approach": "page-environment",
+  "page-contact-style": "page-learning-approach",
+  "page-thankyou": "page-contact-style"
+};
+
+
+
+function prevPage() {
+  pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded'); // refresh
+  const currentId = pages[currentPage].id;
+  let targetId = backRoutes[currentId];
+
+  // Custom previous-page logic for Stay Connected page
+  if (currentId === 'page-contact-style') {
+    if (previousPageId === 'page-environment') {
+      targetId = 'page-environment';
+    } else if (previousPageId === 'page-learning-approach') {
+      targetId = 'page-learning-approach';
+    }
+  }
+
+  if (targetId) {
+    const targetIndex = Array.from(pages).findIndex(p => p.id === targetId);
+    if (targetIndex !== -1) {
+      showPage(targetIndex);
+    }
+  } else if (currentPage > 0) {
+    showPage(currentPage - 1); // fallback
+  }
+}
+
+
+
+
+  // Function to show editable name confirmation page
+  function showNameConfirmation(names) {
+    const confirmPage = document.getElementById('page-name-confirm');
+    const list = document.getElementById('name-confirmation-list');
+    list.innerHTML = '';
+    names.forEach((name, index) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.marginBottom = '1rem';
+     wrapper.className = 'remove-name-wrapper';
+wrapper.innerHTML = `
+  <input type="text" value="${name}" data-index="${index}" class="confirmed-name" style="padding: 0.5rem; width: 60%; font-size: 1rem;" />
+ <span role="button" tabindex="0" class="remove-name-button" onclick="this.parentElement.style.display='none';">✖︎ Not my learner</span>
+`;
+      list.appendChild(wrapper);
+    });
+    showPage(Array.from(pages).indexOf(confirmPage));
+  }
+
+function confirmNames() {
+  // Delay just slightly to let name-confirm DOM settle
+  setTimeout(() => {
+    const inputs = Array.from(document.querySelectorAll('.confirmed-name'));
+
+    children = inputs
+      .filter(input => input.offsetParent !== null)
+      .map(input => input.value.trim())
+      .filter(name => name.length > 0);
+
+    const existingPage = document.getElementById('page-environment');
+    if (existingPage) existingPage.remove();
+
+requestAnimationFrame(() => {
+  renderLearningSections(children);
+
+  setTimeout(() => {
+    pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded');
+    const envIndex = Array.from(pages).findIndex(p => p.id === 'page-environment');
+    showPage(envIndex);
+  }, 20);
+});
+
+  }, 75); // ⏱ allow DOM to paint and rehydrate
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded');
+const welcomeHeader = document.querySelector('#welcome-animated-header');
+if (welcomeHeader) {
+  welcomeHeader.offsetHeight; // 👈 force reflow
+  welcomeHeader.querySelectorAll('span').forEach(span => {
+    span.style.animation = 'none';  // reset
+    span.offsetHeight;              // trigger reflow
+    span.style.animation = '';      // re-apply animation
+  });
+}
+      showPage(0);
+    }, 50); // small delay to avoid layout flicker
+  });
+});
+
+
+function goToPage(targetId) {
+  pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded');
+  const targetIndex = Array.from(pages).findIndex(p => p.id === targetId);
+  if (targetIndex !== -1) showPage(targetIndex);
+}
+
+function showPage(index) {
+  pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded');
+const centerPages = ['page-welcome', 'page-dreams', 'page-learners', 'page-name-confirm', 'page-thankyou'];
+
+if (centerPages.includes(pages[index].id)) {
+  document.body.classList.add('centered-layout');
+} else {
+  document.body.classList.remove('centered-layout');
+}
+
+const offsetPages = ['page-environment', 'page-learning-approach', 'page-contact-style'];
+
+if (offsetPages.includes(pages[index].id)) {
+  document.body.classList.add('top-offset-page');
+} else {
+  document.body.classList.remove('top-offset-page');
+}
+
+  const newPageId = pages[index].id;
+
+  if (newPageId === 'page-environment') {
+    // Defer the render until DOM paint and previous page transition complete
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const inputs = Array.from(document.querySelectorAll('.confirmed-name'));
+        const updated = inputs
+          .filter(input => input.offsetParent !== null)
+          .map(input => input.value.trim())
+          .filter(name => name.length > 0);
+
+        const existingPage = document.getElementById('page-environment');
+        if (existingPage) existingPage.remove();
+
+        children = updated;
+        renderLearningSections(children);
+
+        // Refresh page list after injection
+        pages = document.querySelectorAll('.form-page');
+document.body.classList.add('form-loaded');
+        currentPage = Array.from(pages).findIndex(p => p.id === 'page-environment');
+        pages.forEach(p => p.classList.remove('active'));
+        pages[currentPage].classList.add('active');
+        const isThankYouPage = pages[currentPage].id === 'page-thankyou';
+document.querySelector('.back-button-global').style.display = (!isThankYouPage && currentPage > 0) ? 'block' : 'none';
+      }, 50); // ⏱ wait for paint + layout flush
+    });
+
+    return;
+  }
+
+  // Default behavior
+  pages.forEach(p => p.classList.remove('active'));
+  currentPage = index;
+  pages[currentPage].classList.add('active');
+  const isThankYouPage = pages[currentPage].id === 'page-thankyou';
+document.querySelector('.back-button-global').style.display = (!isThankYouPage && currentPage > 0) ? 'block' : 'none';
+}
+
+
+
+
+
+
+
+function nextPage() {
+  const currentId = pages[currentPage].id;
+if (currentId === 'page-learners') {
+  const raw = document.querySelector('textarea[name="children"]').value;
+
+  // Match one to three adjacent capitalized words (e.g., "Mary Ann", "Jean Claude Van")
+  const nameMatches = raw.match(/\b(?:[\p{Lu}][\p{L}'-]+\s?){1,3}\b/gu) || [];
+
+  const denyList = [
+    "The", "A", "An", "My", "Our", "He", "She", "They", "We", "You", "It", 
+    "In", "On", "At", "To", "From", "With", "And", "But", "Or", "So", "Because"
+  ];
+  const excludedTitles = [
+    "Peppa Pig", "Bluey", "Cocomelon", "Paw Patrol", "Frozen", "Encanto",
+    "Moana", "Toy Story", "Pokemon", "My Little Pony", "SpongeBob", "Dora the Explorer"
+  ];
+
+  let cleaned = nameMatches.map(name => name.trim());
+
+  cleaned = cleaned.filter(name => {
+    const parts = name.split(/\s+/);
+    return !parts.some(p => denyList.includes(p));
+  });
+
+  excludedTitles.forEach(title => {
+    cleaned = cleaned.filter(name => !name.includes(title));
+  });
+
+  const unique = [...new Set(cleaned)];
+  const known = [];
+  const unknown = unique;
+
+  children = known;
+
+// Remove names that are fully uppercase (likely acronyms like ADHD)
+cleaned = cleaned.filter(name => !(name === name.toUpperCase() && name.length > 2));
+
+  showNameConfirmation(unique);
+  return;
+}
+
+
+  if (currentPage < pages.length - 1) showPage(currentPage + 1);
+}
+
+
+function scrollToNextChild(currentSection) {
+  const scrollContainer = document.querySelector('.scroll-container');
+  const children = Array.from(scrollContainer.children);
+  const currentIndex = children.indexOf(currentSection);
+
+  if (currentIndex === -1 || currentIndex === children.length - 1) return;
+
+  const nextSection = children[currentIndex + 1];
+  const targetOffsetTop = nextSection.offsetTop;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      scrollContainer.scrollTo({
+        top: targetOffsetTop,
+        behavior: 'smooth'
+      });
+    });
+  });
+}
+
+
+function revealTextarea(image) {
+  const section = image.closest('.child-section');
+  if (!section) return;
+  const textarea = section.querySelector('.child-textarea');
+  if (textarea) {
+    textarea.style.display = 'block';
+    textarea.focus();
+    // Removed scrollIntoView to prevent scroll bugs
+  }
+}
+
+
+function renderLearningSections() {
+  const container = document.createElement('div');
+  container.className = 'scroll-container';
+  container.style.scrollSnapType = 'y mandatory';
+
+  const page = document.createElement('div');
+  page.className = 'form-page';
+  page.id = 'page-environment';
+
+  children.forEach((child, index) => {
+    const section = document.createElement('div');
+    section.className = 'child-section';
+    section.innerHTML = `
+      <h3>Learning Environment for ${child}</h3>
+      <div class="image-grid">
+        <div><img src="https://via.placeholder.com/100" class="reveal-trigger"><p>Bright, open spaces</p></div>
+        <div><img src="https://via.placeholder.com/100" class="reveal-trigger"><p>Quiet, cozy corners</p></div>
+        <div><img src="https://via.placeholder.com/100" class="reveal-trigger"><p>Nature-filled outdoor areas</p></div>
+        <div><img src="https://via.placeholder.com/100" class="reveal-trigger"><p>Creative, art-inspired rooms</p></div>
+      </div>
+      <textarea class="child-textarea auto-grow" style="display: block;" placeholder="Or describe where your child learns best in your own words" oninput="autoGrow(this)"></textarea>
+    `;
+
+    if (index < children.length - 1) {
+      const cue = document.createElement('div');
+      cue.className = 'scroll-cue';
+cue.innerHTML = `<button class="cue-text pulse-text" type="button">Continue</button>`;
+     cue.querySelector('.cue-text').addEventListener('click', (e) => {
+  e.preventDefault(); // 🧼 prevents focus scroll or double trigger
+  scrollToNextChild(section);
+});
+      section.appendChild(cue);
+    } else {
+      // Adding continue button to final child section
+      const finalContinue = document.createElement('div');
+      finalContinue.className = 'scroll-cue';
+      finalContinue.innerHTML = `<button class="cue-text pulse-text" type="button">Continue</button>`;
+      finalContinue.querySelector('.cue-text').addEventListener('click', () => scrollToNextChild(section));
+      section.appendChild(finalContinue);
+    }
+
+    section.querySelectorAll('.reveal-trigger').forEach(img => {
+      img.addEventListener('click', () => {
+        revealTextarea(img);
+        section.querySelectorAll('.reveal-trigger').forEach(i => i.classList.remove('selected'));
+        img.classList.add('selected');
+      });
+    });
+
+    container.appendChild(section);
+  });
+
+  // Add ultimate section with heading and branching buttons
+  
+  const ultimateSection = document.createElement('div');
+  ultimateSection.className = 'child-section final-child-section';
+  ultimateSection.style.display = 'flex';
+  ultimateSection.style.flexDirection = 'column';
+  ultimateSection.style.justifyContent = 'center';
+  ultimateSection.style.alignItems = 'center';
+  ultimateSection.style.height = '540px';
+  ultimateSection.style.paddingTop = '2.5rem';
+const snapShim = document.createElement('div');
+snapShim.style.height = '4.5rem';
+snapShim.style.marginTop = '-4.5rem';
+snapShim.style.pointerEvents = 'none';
+snapShim.style.visibility = 'hidden';
+ultimateSection.insertBefore(snapShim, ultimateSection.firstChild);
+const topSpacer = document.createElement('div');
+topSpacer.style.height = '2rem'; // or tweak to 2.25rem / 2.5rem
+topSpacer.style.flexShrink = '0';
+ultimateSection.insertBefore(topSpacer, ultimateSection.firstChild);
+
+
+
+  ultimateSection.innerHTML = `
+    <h3 style="text-align: center; margin-bottom: 2rem;">Before we continue…</h3>
+    <div class="navigation-buttons" style="flex-direction: column; gap: 1.25rem; margin-top: 0;">
+      <button type="button" onclick="goToPage('page-learning-approach')">I have a few more preferences to share</button>
+      <button type="button" onclick="previousPageId='page-environment'; goToPage('page-contact-style')">Let’s move to the last step</button>
+    </div>
+  `;
+
+  container.appendChild(ultimateSection);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'scroll-wrapper';
+  wrapper.appendChild(container);
+
+  // Scrollbar setup
+  const goldTrack = document.createElement('div');
+  goldTrack.className = 'scroll-track';
+  const goldThumb = document.createElement('div');
+  goldThumb.className = 'scroll-thumb';
+  goldTrack.appendChild(goldThumb);
+  wrapper.appendChild(goldTrack);
+
+  // Update scrollbar thumb position
+  function updateThumbPosition() {
+    const scrollHeight = container.scrollHeight - container.clientHeight;
+    const scrollTop = container.scrollTop;
+    const visibleRatio = container.clientHeight / container.scrollHeight;
+
+    goldThumb.style.height = `${visibleRatio * 100}%`;
+
+    const thumbTravel = container.clientHeight - goldThumb.offsetHeight;
+    const thumbTop = (scrollTop / scrollHeight) * thumbTravel;
+    goldThumb.style.top = `${thumbTop}px`;
+  }
+
+  container.addEventListener('scroll', updateThumbPosition);
+  window.addEventListener('resize', updateThumbPosition);
+  setTimeout(updateThumbPosition, 50);
+
+  page.appendChild(wrapper);
+  const form = document.querySelector('#lyra-intake-form');
+  const insertBefore = document.querySelector('#page-learning-approach');
+  form.insertBefore(page, insertBefore);
+}
+
+
+
+document.addEventListener('click', function(e) {
+  const wrappers = document.querySelectorAll('.custom-select-wrapper');
+  wrappers.forEach(wrapper => {
+    const selected = wrapper.querySelector('.custom-select-selected');
+    const options = wrapper.querySelector('.custom-select-options');
+    const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+
+    if (wrapper.contains(e.target)) {
+      wrapper.classList.toggle('open');
+      if (e.target.tagName === 'LI') {
+        selected.textContent = e.target.textContent;
+        hiddenInput.value = e.target.dataset.value;
+        wrapper.classList.remove('open');
+      }
+    } else {
+      wrapper.classList.remove('open');
+    }
+  });
+});
+
+
+let dropdownSearchBuffer = '';
+let dropdownSearchTimeout = null;
+
+document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+  wrapper.addEventListener('keydown', e => {
+    if (e.key.length === 1 && /^[a-zA-Z]$/.test(e.key)) {
+      clearTimeout(dropdownSearchTimeout);
+      dropdownSearchBuffer += e.key.toLowerCase();
+      dropdownSearchTimeout = setTimeout(() => dropdownSearchBuffer = '', 800);
+
+      const options = wrapper.querySelectorAll('.custom-select-options li');
+      let found = false;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].textContent.toLowerCase().startsWith(dropdownSearchBuffer)) {
+          options[i].scrollIntoView({ block: "nearest" });
+          found = true;
+          break;
+        }
+      }
+      if (!found) dropdownSearchBuffer = ''; // reset if no match
+    }
+  });
+});
+
+
+function toggleCustomCheckbox(input) {
+  const checkbox = input.nextElementSibling;
+  if (input.checked) {
+    checkbox.classList.add('checked');
+  } else {
+    checkbox.classList.remove('checked');
+  }
+}
+
+document.addEventListener('mousedown', function(e) {
+  if (e.target.classList.contains('cue-text')) {
+    e.preventDefault(); // Prevents Safari from setting focus
+  }
+});
+
+
+</script>
+<script>
+(function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
+  window.lyraToken = token;
+
+  const formContainer = document.querySelector(".form-container");
+  const denyMessage = document.getElementById("access-denied");
+
+  if (!token || token.length < 6) {
+    if (formContainer) formContainer.style.display = "none";
+    if (denyMessage) denyMessage.style.display = "block";
+  }
+})();
+</script>
+<script>
+(function () {
+  const form = document.querySelector("form");
+  const webhookURL = "http://192.168.1.248:5678/webhook/lyra-form-submission";
+
+  // 🧠 Metric Variables
+  let formStartTime = performance.now();
+  let tapEvents = 0;
+let scrollOccurred = false;
+document.querySelector('.scroll-container')?.addEventListener('scroll', () => {
+  scrollOccurred = true;
+});
+  let backButtonCount = 0;
+  let lastActivity = Date.now();
+
+  // 🕵️ Activity Tracking
+  ['click', 'touchstart', 'scroll', 'keydown'].forEach(evt =>
+    document.addEventListener(evt, () => {
+      tapEvents++;
+      lastActivity = Date.now();
+    })
+  );
+
+  // 🔙 Back button usage
+  document.querySelectorAll('.back-button').forEach(button => {
+    button.addEventListener('click', () => {
+      backButtonCount++;
+    });
+  });
+
+// 🚀 Final form submission logic
+document.querySelector("form").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const formData = {};
+
+  // ✏️ Capture confirmed names and learning environments
+  formData.children = Array.from(document.querySelectorAll('.child-section')).map(section => {
+    const nameInput = section.querySelector('.confirmed-name');
+    const textarea = section.querySelector('.child-textarea');
+    return {
+      name: nameInput?.value.trim() || '',
+      learning_environment: textarea?.value.trim() || ''
+    };
+  });
+
+  // 🧼 Skipped inputs
+  const skippedInputs = Array.from(document.querySelectorAll('input, textarea'))
+    .filter(el => el.name && !el.value.trim())
+    .map(el => el.name);
+  formData.skipped_inputs = skippedInputs.join(', ');
+
+  // ✅ Communication preferences (checkboxes + "other" input)
+const checkboxValues = Array.from(document.querySelectorAll('input[name="comm_style"]:checked'))
+  .map(cb => cb.value);
+const otherComm = document.querySelector('.communication-other')?.value?.trim();
+if (otherComm) checkboxValues.push(otherComm);
+formData.communication_preferences = checkboxValues.join(', ');
+
+  // 📸 Learning image selections
+  document.querySelectorAll("[data-value]").forEach((el) => {
+    const name = el.getAttribute("data-name");
+    if (el.classList.contains("selected")) {
+      if (!formData[name]) formData[name] = [];
+      formData[name].push(el.getAttribute("data-value"));
+    }
+  });
+
+  // 🧠 Metrics
+  const now = Date.now();
+  formData.timestamp = new Date().toISOString();
+  formData.submission_duration = Number(((performance.now() - formStartTime) / 1000).toFixed(2));
+  formData.pause_duration_before_submit = Math.round((now - lastActivity) / 1000);
+  formData.tap_events_count = tapEvents;
+  formData.back_button_usage = backButtonCount;
+  formData.scroll_behavior = scrollOccurred ? "yes" : "no";
+  formData.cursor_movements = mouseMoves.length > 0 ? "yes" : "no";
+  formData.time_on_each_page = Object.entries(pageDurations).map(([page, ms]) => `${page}:${Math.round(ms / 1000)}s`).join(', ');
+  formData.interaction_score = Math.max(10, Math.min(100, 100 - skippedInputs.length * 5 - backButtonCount * 2));
+
+  // 🚀 Send to n8n webhook
+  fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  }).then(() => {
+    console.log("Form submitted to n8n");
+    form.submit(); // fallback
+  }).catch(err => {
+    alert("Submission failed. Please try again.");
+    console.error(err);
+  });
+});
+
+})();
+</script>
+<script>
+// === MICRO-INTERACTION TRACKING ===
+let formStartTime = Date.now();
+let backButtonCount = 0;
+let scrollEvents = [];
+let mouseMoves = [];
+let tapCount = 0;
+let lastActivityTime = Date.now();
+let pageDurations = {};
+let currentFormPageId = '';
+
+const formPages = document.querySelectorAll('.form-page');
+
+function trackPageDurations() {
+  const now = Date.now();
+  if (currentFormPageId) {
+    pageDurations[currentFormPageId] = (pageDurations[currentFormPageId] || 0) + (now - lastActivityTime);
+  }
+  currentFormPageId = formPages[currentPage]?.id || '';
+  lastActivityTime = now;
+}
+setInterval(trackPageDurations, 500);
+
+document.addEventListener('click', e => {
+  tapCount++;
+  lastActivityTime = Date.now();
+});
+document.addEventListener('scroll', e => {
+  const delta = Math.abs(window.scrollY - (scrollEvents.at(-1)?.y || 0));
+  scrollEvents.push({ y: window.scrollY, delta, time: Date.now() });
+});
+document.addEventListener('mousemove', e => {
+  mouseMoves.push({ x: e.clientX, y: e.clientY, t: Date.now() });
+});
+document.querySelector('.back-button-global').addEventListener('click', () => backButtonCount++);
+
+function getSkippedInputs() {
+  return Array.from(document.querySelectorAll('input, textarea')).filter(el => el.name && !el.value.trim()).map(el => el.name);
+}
+
+function getFormMetrics() {
+  const now = Date.now();
+  return {
+    timestamp: new Date(now).toISOString(),
+    submission_duration: Math.round((now - formStartTime) / 1000),
+    pause_duration_before_submit: Math.round((now - lastActivityTime) / 1000),
+    back_button_usage: backButtonCount,
+    tap_events_count: tapCount,
+    scroll_behavior: scrollEvents.slice(-5).map(e => e.delta).join(','),
+    cursor_movements: mouseMoves.length > 0 ? 'yes' : 'no',
+    skipped_inputs: getSkippedInputs(),
+    time_on_each_page: Object.entries(pageDurations).map(([page, ms]) => `${page}:${Math.round(ms / 1000)}s`).join(', '),
+    interaction_score: Math.max(10, Math.min(100, 100 - getSkippedInputs().length * 5 - backButtonCount * 2))
+  };
+}
+
+// Modify final form submission block to include metrics
+document.querySelector('form').addEventListener('submit', function(e) {
+  const metrics = getFormMetrics();
+  const hidden = document.createElement('input');
+  hidden.type = 'hidden';
+  hidden.name = 'form_metrics';
+  hidden.value = JSON.stringify(metrics);
+  this.appendChild(hidden);
+});
+function submitLyraForm() {
+  const form = document.getElementById("lyra-intake-form");
+  const metrics = getFormMetrics();
+
+  // Add metrics as a hidden input
+  const hidden = document.createElement('input');
+  hidden.type = 'hidden';
+  hidden.name = 'form_metrics';
+  hidden.value = JSON.stringify(metrics);
+  form.appendChild(hidden);
+
+  // Collect all form data
+  const formData = new FormData(form);
+  const json = {};
+
+  formData.forEach((value, key) => {
+    if (json[key]) {
+      if (!Array.isArray(json[key])) json[key] = [json[key]];
+      json[key].push(value);
+    } else {
+      json[key] = value;
+    }
+  });
+
+  // Include token
+  json.parent_token = window.lyraToken;
+
+  // Submit to webhook
+  fetch("http://192.168.1.248:5678/webhook/lyra-form-submission", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(json),
+  })
+  .then(() => {
+    goToPage("page-thankyou");
+  })
+  .catch(err => {
+    console.error("Webhook submission failed:", err);
+
+    const thankYouPage = document.getElementById('page-thankyou');
+    if (thankYouPage) {
+      thankYouPage.querySelector('p').innerText =
+        "Thank you for your submission. If anything didn’t go through, we’ll take care of it for you.";
+    }
+
+    goToPage("page-thankyou");
+  });
+}
+</script>
+</body>
+</html>
